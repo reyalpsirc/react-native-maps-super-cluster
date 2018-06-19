@@ -65,7 +65,7 @@ export default class ClusteredMapView extends PureComponent {
     this.index = SuperCluster({ // eslint-disable-line new-cap
       extent: this.props.extent,
       minZoom: this.props.minZoom,
-      maxZoom: this.props.maxZoom,
+      maxZoom: 20,
       radius: this.props.radius || (this.dimensions[0] * .045), // 4.5% of screen width
     })
 
@@ -114,7 +114,6 @@ export default class ClusteredMapView extends PureComponent {
 
     // fit right around them, considering edge padding
     this.mapview.fitToCoordinates(markers.map(m => m.location), { edgePadding: this.props.edgePadding })
-
     this.props.onClusterPress && this.props.onClusterPress(cluster.properties.cluster_id, markers)
   }
 
@@ -154,7 +153,7 @@ export default class ClusteredMapView extends PureComponent {
 
 ClusteredMapView.defaultProps = {
   minZoom: 1,
-  maxZoom: 20,
+  maxZoom: 5,
   extent: 512,
   textStyle: {},
   containerStyle: {},
@@ -166,7 +165,7 @@ ClusteredMapView.defaultProps = {
   preserveClusterPressBehavior: true,
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-  edgePadding: { top: 10, left: 10, right: 10, bottom: 10 }
+  edgePadding: { top: 100, left: 100, right: 100, bottom: 100 }
 }
 
 ClusteredMapView.propTypes = {
