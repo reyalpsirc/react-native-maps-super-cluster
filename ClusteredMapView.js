@@ -93,8 +93,8 @@ export default class ClusteredMapView extends PureComponent {
   getClusters = (region) => {
     const bbox = regionToBoundingBox(region),
           viewport = (region.longitudeDelta) >= 40 ? { zoom: this.props.minZoom } : GeoViewport.viewport(bbox, this.dimensions)
-
-    return this.index.getClusters(bbox, viewport.zoom)
+    return this.index.getClusters([-180, -85, 179.999999, 85], viewport.zoom) // always get all of the clusters so that it does not redraw
+    // return this.index.getClusters(bbox, viewport.zoom)
   }
 
   onClusterPress = (cluster) => {
